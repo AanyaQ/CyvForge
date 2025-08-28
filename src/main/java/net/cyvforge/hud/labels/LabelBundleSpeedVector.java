@@ -19,8 +19,8 @@ public class LabelBundleSpeedVector extends LabelBundle {
             public String getDisplayName() {return "Speeds";}
             public int getWidth() {
                 FontRenderer font = mc.fontRendererObj;
-                String num = "000000.";
-                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) num += "0";
+                StringBuilder num = new StringBuilder("000000.");
+                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) num.append("0");
                 return font.getStringWidth("Speeds: " + num + "/" + num + "/" + num);
             }
             public int getHeight() {return getLabelHeight();}
@@ -35,7 +35,7 @@ public class LabelBundleSpeedVector extends LabelBundle {
                 String x = df.format(ParkourTickListener.vx);
                 String y = df.format(ParkourTickListener.vy);
                 String z = df.format(ParkourTickListener.vz);
-                drawString("Speeds: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + getHeight()*0, color1);
+                drawString("Speeds: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
                 drawString(x, pos.getAbsoluteX() + 1 + font.getStringWidth("Speeds: ")
                         , pos.getAbsoluteY() + 1, color2);
                 drawString("/", pos.getAbsoluteX() + 1 + font.getStringWidth("Speeds: " + x)
@@ -48,22 +48,21 @@ public class LabelBundleSpeedVector extends LabelBundle {
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
-                String str = "0.";
-                for (int i = 0; i<Integer.valueOf(CyvForge.config.configFields.get("df").value.toString()); i++) str += "0";
-                drawString("Speeds: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + getHeight()*0, color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Speeds: ")
+                StringBuilder str = new StringBuilder("0.");
+                for (int i = 0; i<Integer.parseInt(CyvForge.config.configFields.get("df").value.toString()); i++) str.append("0");
+                drawString("Speeds: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("Speeds: ")
                         , pos.getAbsoluteY() + 1, color2);
                 drawString("/", pos.getAbsoluteX() + 1 + font.getStringWidth("Speeds: " + str)
                         , pos.getAbsoluteY() + 1, color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Speeds: " + str + "/")
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("Speeds: " + str + "/")
                         , pos.getAbsoluteY() + 1, color2);
                 drawString("/", pos.getAbsoluteX() + 1 + font.getStringWidth("Speeds: " + str + "/" + str)
                         , pos.getAbsoluteY() + 1, color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Speeds: " + str + "/" + str + "/")
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("Speeds: " + str + "/" + str + "/")
                         , pos.getAbsoluteY() + 1, color2);
             }
         });
@@ -93,7 +92,7 @@ public class LabelBundleSpeedVector extends LabelBundle {
                 String speed = df.format(Math.hypot(ParkourTickListener.vx, ParkourTickListener.vz));
                 String angle = df.format(Math.toDegrees(Math.atan2((ParkourTickListener.vx == 0) ? 0 : -ParkourTickListener.vx, ParkourTickListener.vz)));
 
-                drawString("Speed Vector: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + getHeight()*0, color1);
+                drawString("Speed Vector: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
                 drawString(speed, pos.getAbsoluteX() + 1 + font.getStringWidth("Speed Vector: ")
                         , pos.getAbsoluteY() + 1, color2);
                 drawString("/", pos.getAbsoluteX() + 1 + font.getStringWidth("Speed Vector: " + speed)
@@ -102,15 +101,14 @@ public class LabelBundleSpeedVector extends LabelBundle {
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
 
-                String str = "0.";
-                for (int i = 0; i<Integer.valueOf(CyvForge.config.configFields.get("df").value.toString()); i++) str += "0";
-                drawString("Speed Vector: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + getHeight()*0, color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Speed Vector: ")
+                StringBuilder str = new StringBuilder("0.");
+                for (int i = 0; i<Integer.parseInt(CyvForge.config.configFields.get("df").value.toString()); i++) str.append("0");
+                drawString("Speed Vector: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("Speed Vector: ")
                         , pos.getAbsoluteY() + 1, color2);
                 drawString("/", pos.getAbsoluteX() + 1 + font.getStringWidth("Speed Vector: " + str)
                         , pos.getAbsoluteY() + 1, color1);

@@ -6,10 +6,7 @@ import net.cyvforge.CyvForge;
 import net.cyvforge.util.defaults.CyvGui;
 import net.cyvforge.util.GuiUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
@@ -19,12 +16,10 @@ import java.util.ArrayList;
 
 //gui for the in-game movement simulator
 public class GuiSimulate extends CyvGui {
-    public static ArrayList<String> chatHistory = new ArrayList<String>();
+    public static ArrayList<String> chatHistory = new ArrayList<>();
 
-    public boolean repeatEventsEnabled;
-    public GuiScreen eventReceiver;
     GuiTextField input;
-    GuiButton button;
+    SubButton button;
     int chatHistoryIndex = 0;
 
     public GuiSimulate() {
@@ -34,8 +29,10 @@ public class GuiSimulate extends CyvGui {
     @Override
     public void initGui() {
         super.initGui();
-        input = new GuiTextField(0, fontRendererObj, width/2-width*23/80, (int) (height*0.40-10), width*23/40, 20);
-        button = new GuiButton(0, width/2-50, height*3/5-10, 100, 20, "Calculate");
+        System.out.println(width + " " + height);
+        input = new GuiTextField(0, fontRendererObj, width/2 - 184, height / 2 - 45, 368, 20);
+        button = new SubButton("Calculate", width/2-50, height*3/5-10, 100, 15);
+        button.setEnabled(true);
 
         input.setMaxStringLength(65536);
         this.chatHistoryIndex = 0;
@@ -47,26 +44,15 @@ public class GuiSimulate extends CyvGui {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        ScaledResolution sr = new ScaledResolution(mc);
-        int width = sr.getScaledWidth();
-        int height = sr.getScaledHeight();
-
-        int x1 = (int) (sr.getScaledWidth_double() * 0.20);
-        int y1 = (int) (sr.getScaledHeight_double() * 0.30);
-        int x2 = (int) (sr.getScaledWidth_double() * 0.80);
-        int y2 = (int) (sr.getScaledHeight_double() * 0.50);
-
-        int borderColor = new Color(0,0,0,255).getRGB();
-        int consoleColor = new Color(150, 150, 150, 255).getRGB();
-
         super.drawDefaultBackground(); //background tint
-        GuiUtils.drawRoundedRect(x1-2, y1-2, x2+2, y2+2, 9, borderColor);
-        GuiUtils.drawRoundedRect(x1, y1, x2, y2, 7, consoleColor); //black box
+        GuiUtils.drawRoundedRect(width / 2 - 200, height / 2 - 65, width / 2 + 200, height / 2,
+                7, CyvForge.theme.background1); //black box
 
         input.drawTextBox();
 
-        button.drawButton(mc, mouseX, mouseY);
-        GuiUtils.drawCenteredString("Movement Simulator", x1+46, y1-15, 0xFFFFFFFF, true);
+        GuiUtils.drawRoundedRect(width/2-54, height*3/5-14, width/2+54, height*3/5+9, 5, CyvForge.theme.background1);
+        button.draw(mouseX, mouseY);
+        GuiUtils.drawCenteredString("Movement Simulator", width / 2 - 150, height / 2 - 80, 0xFFFFFFFF, true);
     }
 
     public void updateScreen() {
@@ -79,11 +65,10 @@ public class GuiSimulate extends CyvGui {
             Minecraft.getMinecraft().thePlayer.closeScreen(); //close the gui
             String text = input.getText(); //parser shit
 
-            if (text.equals("") || text.equals(" ")) {
-
+            if (text.isEmpty() || text.equals(" ")) {
 
             } else {
-                if (chatHistory.size() == 0) {
+                if (chatHistory.isEmpty()) {
                     chatHistory.add(text);
 
                 } else {
@@ -124,29 +109,21 @@ public class GuiSimulate extends CyvGui {
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         input.mouseClicked(mouseX, mouseY, mouseButton);
-        if (button.mousePressed(mc, mouseX, mouseY)) {
+        if (button.clicked(mouseX, mouseY, mouseButton)) {
             Minecraft.getMinecraft().thePlayer.closeScreen(); //close the gui
             String text = input.getText(); //parser shit
 
-            if (text.equals("") || text.equals(" ")) {
-
-
+            if (text.isEmpty() || text.equals(" ")) {
             } else {
-
-                if (chatHistory.size() == 0) {
-
+                if (chatHistory.isEmpty()) {
                     chatHistory.add(text);
 
                 } else {
                     if (!chatHistory.get(chatHistory.size()-1).equals(text)) {
-
                         chatHistory.add(text);
-
                     }
                 }
-
                 output(text);
-
             }}
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
@@ -155,7 +132,7 @@ public class GuiSimulate extends CyvGui {
         new Thread(() -> {
             Player player = new Player();
             DecimalFormat df = CyvForge.df;
-            player.df = (byte) df.getMaximumFractionDigits();
+            Player.df = (byte) df.getMaximumFractionDigits();
             Parser parser = new Parser();
 
             try {
@@ -178,7 +155,7 @@ public class GuiSimulate extends CyvGui {
                     + "vz: " + df.format(vz) + "\n"
                     + "x: " + df.format(x) + "\n"
                     + "vx: " + df.format(vx) + "\n"
-                    + "Speed Vector: " + df.format(vector) + ", " + df.format(angle) + "\u00B0");
+                    + "Speed Vector: " + df.format(vector) + ", " + df.format(angle) + "°");
         }).start();
 
     }

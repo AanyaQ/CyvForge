@@ -5,10 +5,12 @@ import net.cyvforge.config.ColorTheme;
 import net.cyvforge.util.GuiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 
 import java.io.IOException;
 
 public class CyvGui extends GuiScreen {
+    protected ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
     public String name;
 
     public CyvGui(String name) {
@@ -56,6 +58,14 @@ public class CyvGui extends GuiScreen {
             this.text = text;
             this.x = x;
             this.y = y;
+        }
+
+        public SubButton(String text, int x, int y, int width, int height) {
+            this.text = text;
+            this.x = x;
+            this.y = y;
+            this.sizeX = width;
+            this.sizeY = height;
         }
 
         public void draw(int mouseX, int mouseY) {

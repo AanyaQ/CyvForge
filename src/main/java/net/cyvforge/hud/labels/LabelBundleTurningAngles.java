@@ -28,19 +28,18 @@ public class LabelBundleTurningAngles extends LabelBundle {
 
                 DecimalFormat df = CyvForge.df;
                 String ja = df.format(ParkourTickListener.formatYaw(ParkourTickListener.jf));
-                drawString("Jump Angle: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + getHeight()*0, color1);
+                drawString("Jump Angle: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
                 drawString(ja+"\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth("Jump Angle: ")
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
-                String str = "0.";
-                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
 
-                drawString("Jump Angle: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + getHeight()*0, color1);
+                drawString("Jump Angle: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
                 drawString(str+"\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth("Jump Angle: ")
                         , pos.getAbsoluteY() + 1, color2);
             }
@@ -61,22 +60,21 @@ public class LabelBundleTurningAngles extends LabelBundle {
                 DecimalFormat df = CyvForge.df;
                 String st = df.format(ParkourTickListener.formatYaw(ParkourTickListener.sf - ParkourTickListener.jf));
 
-                drawString("Second Turn: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(st, pos.getAbsoluteX() + 1 + font.getStringWidth("Second Turn: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("Second Turn: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(st, pos.getAbsoluteX() + 1 + font.getStringWidth("Second Turn: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
 
-                String str = "0.";
-                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
 
-                drawString("Second Turn: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Second Turn: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("Second Turn: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("Second Turn: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
         });
 
@@ -95,22 +93,21 @@ public class LabelBundleTurningAngles extends LabelBundle {
                 DecimalFormat df = CyvForge.df;
                 String pt = df.format(ParkourTickListener.formatYaw(ParkourTickListener.pf));
 
-                drawString("Preturn: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(pt+"\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth("Preturn: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("Preturn: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(pt+"\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth("Preturn: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
 
-                String str = "0.";
-                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
 
-                drawString("Preturn: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(str+"\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth("Preturn: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("Preturn: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(str+"\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth("Preturn: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
         });
     }

@@ -1,10 +1,8 @@
 package net.cyvforge.util;
 
-
 import net.minecraft.util.MathHelper;
 
-public class MathUtils
-{
+public class MathUtils {
     public static final float PI = (float)Math.PI;
     public static final float PI2 = ((float)Math.PI * 2F);
     public static final float PId2 = ((float)Math.PI / 2F);

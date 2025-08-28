@@ -35,22 +35,21 @@ public class LabelBundleMomentumOffsets extends LabelBundle {
                     x = (ParkourTickListener.momentumBlock.lastOffsetX == null) ? "NaN" : df.format(ParkourTickListener.momentumBlock.lastOffsetX.doubleValue());
                 }
 
-                drawString("MM X Offset: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(x, pos.getAbsoluteX() + 1 + font.getStringWidth("MM X Offset: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("MM X Offset: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(x, pos.getAbsoluteX() + 1 + font.getStringWidth("MM X Offset: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
 
-                String str = "0.";
-                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
 
-                drawString("MM X Offset: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("MM X Offset: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("MM X Offset: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("MM X Offset: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
         });
 
@@ -75,22 +74,21 @@ public class LabelBundleMomentumOffsets extends LabelBundle {
                     z = (ParkourTickListener.momentumBlock.lastOffsetZ == null) ? "NaN" : df.format(ParkourTickListener.momentumBlock.lastOffsetZ.doubleValue());
                 }
 
-                drawString("MM Z Offset: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(z, pos.getAbsoluteX() + 1 + font.getStringWidth("MM Z Offset: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("MM Z Offset: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(z, pos.getAbsoluteX() + 1 + font.getStringWidth("MM Z Offset: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
 
-                String str = "0.";
-                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
 
-                drawString("MM Z Offset: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("MM Z Offset: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("MM Z Offset: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("MM Z Offset: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
         });
 

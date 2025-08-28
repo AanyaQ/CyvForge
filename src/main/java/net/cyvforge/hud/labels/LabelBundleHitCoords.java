@@ -34,16 +34,15 @@ public class LabelBundleHitCoords extends LabelBundle {
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
 
-                String str = "0.";
-                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
 
                 drawString("Hit X: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Hit X: ")
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("Hit X: ")
                         , pos.getAbsoluteY() + 1, color2);
             }
         });
@@ -63,22 +62,21 @@ public class LabelBundleHitCoords extends LabelBundle {
                 DecimalFormat df = CyvForge.df;
                 String y = df.format(ParkourTickListener.hy);
 
-                drawString("Hit Y: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(y, pos.getAbsoluteX() + 1 + font.getStringWidth("Hit Y: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("Hit Y: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(y, pos.getAbsoluteX() + 1 + font.getStringWidth("Hit Y: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
 
-                String str = "0.";
-                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
 
-                drawString("Hit Y: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Hit Y: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("Hit Y: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("Hit Y: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
         });
 
@@ -97,22 +95,21 @@ public class LabelBundleHitCoords extends LabelBundle {
                 DecimalFormat df = CyvForge.df;
                 String z = df.format(ParkourTickListener.hz);
 
-                drawString("Hit Z: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(z, pos.getAbsoluteX() + 1 + font.getStringWidth("Hit Z: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("Hit Z: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(z, pos.getAbsoluteX() + 1 + font.getStringWidth("Hit Z: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
 
-                String str = "0.";
-                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
 
-                drawString("Hit Z: ", pos.getAbsoluteX() + 1, (int) (pos.getAbsoluteY() + 1), color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Hit Z: ")
-                        , (int) (pos.getAbsoluteY() + 1), color2);
+                drawString("Hit Z: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("Hit Z: "),
+                        pos.getAbsoluteY() + 1, color2);
             }
         });
 

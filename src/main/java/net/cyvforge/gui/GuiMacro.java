@@ -23,9 +23,8 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.ScaledResolution;
 
 public class GuiMacro extends CyvGui {
-    ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-    int sizeX = sr.getScaledWidth()*7/8;
-    int sizeY = sr.getScaledHeight()*7/8;
+    int sizeX = 500;
+    int sizeY = 300;
 
     SubButton addRow;
     SubButton duplicateRow;
@@ -54,12 +53,9 @@ public class GuiMacro extends CyvGui {
     @Override
     public void initGui() { //initialize the macro
         ArrayList<ArrayList<String>> macro;
-        this.macroLines = new ArrayList<MacroLine>();
+        this.macroLines = new ArrayList<>();
 
         Keyboard.enableRepeatEvents(true);
-
-        this.sizeX = sr.getScaledWidth()*7/8;
-        this.sizeY = sr.getScaledHeight()*7/8;
 
         this.addRow = new SubButton("Add Row", (sr.getScaledWidth() + sizeY +30)/2 - 75, sr.getScaledHeight()/2 - sizeY/2 + 40);
         this.duplicateRow = new SubButton("Duplicate Row", (sr.getScaledWidth() + sizeY +30)/2 - 75, sr.getScaledHeight()/2 - sizeY/2 + 60);

@@ -9,7 +9,6 @@ import net.cyvforge.util.defaults.CyvGui;
 import net.cyvforge.util.GuiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -18,7 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class GuiMPK extends CyvGui {
-    ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
     int sizeX = 100;
     int sizeY = 250;
 
@@ -48,18 +46,15 @@ public class GuiMPK extends CyvGui {
     public void initGui() {
         this.labelLines = new ArrayList<>();
         this.guiEditButton = new SubButton("Edit Positions", sr.getScaledWidth() / 2 + sizeX / 2 + 50,
-                sr.getScaledHeight() / 2 - sizeY / 2);
-        this.guiEditButton.setSizeX(100);
+                sr.getScaledHeight() / 2 - sizeY / 2, 100, 15);
         this.guiEditButton.setEnabled(true);
 
         this.settingsButton = new SubButton("Settings", sr.getScaledWidth() / 2 + sizeX / 2 + 50,
-                sr.getScaledHeight() / 2 - sizeY / 2 + 20);
-        this.settingsButton.setSizeX(100);
+                sr.getScaledHeight() / 2 - sizeY / 2 + 20, 100, 15);
         this.settingsButton.setEnabled(Minecraft.getMinecraft().isSingleplayer());
 
         this.macroButton = new SubButton("Open Macro", sr.getScaledWidth() / 2 + sizeX / 2 + 50,
-                sr.getScaledHeight() / 2 - sizeY / 2 + 40);
-        this.macroButton.setSizeX(100);
+                sr.getScaledHeight() / 2 - sizeY / 2 + 40, 100, 15);
         this.macroButton.setEnabled(Minecraft.getMinecraft().isSingleplayer());
 
         this.updateLabels(false);

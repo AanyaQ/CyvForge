@@ -2,7 +2,6 @@ package net.cyvforge.hud.labels;
 
 import net.cyvforge.CyvForge;
 import net.cyvforge.config.CyvClientColorHelper;
-import net.cyvforge.config.CyvClientConfig;
 import net.cyvforge.event.events.ParkourTickListener;
 import net.cyvforge.hud.LabelBundle;
 import net.cyvforge.hud.structure.DraggableHUDElement;
@@ -28,19 +27,18 @@ public class LabelBundleSpeeds extends LabelBundle {
                 FontRenderer font = mc.fontRendererObj;
                 DecimalFormat df = CyvForge.df;
                 String x = df.format(ParkourTickListener.vx);
-                drawString("X Speed: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + getHeight()*0, color1);
+                drawString("X Speed: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
                 drawString(x, pos.getAbsoluteX() + 1 + font.getStringWidth("X Speed: ")
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
-                String str = "0.";
-                for (int i = 0; i<Integer.valueOf(CyvForge.config.configFields.get("df").value.toString()); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i = 0; i<Integer.parseInt(CyvForge.config.configFields.get("df").value.toString()); i++) str.append("0");
                 drawString("X Speed: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("X Speed: ")
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("X Speed: ")
                         , pos.getAbsoluteY() + 1, color2);
             }
         });
@@ -59,19 +57,18 @@ public class LabelBundleSpeeds extends LabelBundle {
                 FontRenderer font = mc.fontRendererObj;
                 DecimalFormat df = CyvForge.df;
                 String y = df.format(ParkourTickListener.vy);
-                drawString("Y Speed: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + getHeight()*0, color1);
+                drawString("Y Speed: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
                 drawString(y, pos.getAbsoluteX() + 1 + font.getStringWidth("Y Speed: ")
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
-                String str = "0.";
-                for (int i = 0; i<Integer.valueOf(CyvForge.config.configFields.get("df").value.toString()); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i = 0; i<Integer.parseInt(CyvForge.config.configFields.get("df").value.toString()); i++) str.append("0");
                 drawString("Y Speed: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Y Speed: ")
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("Y Speed: ")
                         , pos.getAbsoluteY() + 1, color2);
             }
         });
@@ -90,19 +87,18 @@ public class LabelBundleSpeeds extends LabelBundle {
                 FontRenderer font = mc.fontRendererObj;
                 DecimalFormat df = CyvForge.df;
                 String z = df.format(ParkourTickListener.vz);
-                drawString("Z Speed: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + getHeight()*0, color1);
+                drawString("Z Speed: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
                 drawString(z, pos.getAbsoluteX() + 1 + font.getStringWidth("Z Speed: ")
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                int d = CyvClientConfig.getInt("df",5);
                 long color1 = CyvClientColorHelper.color1.drawColor;
                 long color2 = CyvClientColorHelper.color2.drawColor;
                 FontRenderer font = mc.fontRendererObj;
-                String str = "0.";
-                for (int i = 0; i<Integer.valueOf(CyvForge.config.configFields.get("df").value.toString()); i++) str += "0";
+                StringBuilder str = new StringBuilder("0.");
+                for (int i = 0; i<Integer.parseInt(CyvForge.config.configFields.get("df").value.toString()); i++) str.append("0");
                 drawString("Z Speed: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
-                drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Z Speed: ")
+                drawString(str.toString(), pos.getAbsoluteX() + 1 + font.getStringWidth("Z Speed: ")
                         , pos.getAbsoluteY() + 1, color2);
             }
         });
