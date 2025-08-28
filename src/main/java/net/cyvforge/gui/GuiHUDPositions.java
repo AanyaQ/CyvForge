@@ -28,7 +28,6 @@ public class GuiHUDPositions extends CyvGui {
         super("HUD Position");
         Collection<DraggableHUDElement> registeredRenderers = HUDManager.registeredRenderers;
         this.fromLabels = fromLabels;
-        //Keyboard.enableRepeatEvents(true);
 
         for (DraggableHUDElement renderer : registeredRenderers) {
             if (!renderer.isEnabled) continue;

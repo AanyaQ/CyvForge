@@ -26,17 +26,19 @@ public class GuiModConfig extends CyvGui {
     SubButton backButton;
 
     ColorTheme theme;
-
     float vScroll = 0;
     float scroll = 0;
     int maxScroll = 0;
     boolean scrollClicked = false;
 
-    public GuiModConfig() {
+    protected final boolean fromLabels;
+
+    public GuiModConfig(boolean fromLabels) {
         super("Mod Config");
         mc = Minecraft.getMinecraft();
         sr = new ScaledResolution(mc);
         fontRendererObj = mc.fontRendererObj;
+        this.fromLabels = fromLabels;
 
         this.backButton = new SubButton("Back", sr.getScaledWidth()/2-sizeX/2-4, sr.getScaledHeight()/2-sizeY/2-21);
         this.theme = CyvForge.theme;
@@ -230,7 +232,8 @@ public class GuiModConfig extends CyvGui {
         }
 
         if (this.backButton.clicked(mouseX, mouseY, mouseButton)) {
-            mc.displayGuiScreen(null);
+            if (fromLabels) Minecraft.getMinecraft().displayGuiScreen(new GuiMPK());
+            else Minecraft.getMinecraft().displayGuiScreen(null);
             return;
         }
 
@@ -257,7 +260,8 @@ public class GuiModConfig extends CyvGui {
     @Override
     public void keyTyped(char typedChar, int keyCode) throws IOException {
         if (keyCode == Keyboard.KEY_ESCAPE) { //exit the gui
-            mc.displayGuiScreen(null);
+            if (fromLabels) Minecraft.getMinecraft().displayGuiScreen(new GuiMPK());
+            else Minecraft.getMinecraft().displayGuiScreen(null);
             return;
         }
 

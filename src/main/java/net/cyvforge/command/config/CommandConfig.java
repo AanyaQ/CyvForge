@@ -16,6 +16,6 @@ public class CommandConfig extends CyvCommand {
 
     @Override
     public void run(ICommandSender sender, String[] args) {
-        GuiHandler.setScreen(new GuiModConfig());
+        GuiHandler.setScreen(new GuiModConfig(false));
     }
 }
