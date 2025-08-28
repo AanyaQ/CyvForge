@@ -9,7 +9,7 @@ public class CyvClientColorHelper {
     public static String[] colorStrings;
 
     static {
-        colors = new ArrayList<CyvClientColor>();
+        colors = new ArrayList<>();
         colors.add(new CyvClientColor("dark_red", ChatFormattingString.DARK_RED, 11141120));
         colors.add(new CyvClientColor("red", ChatFormattingString.RED, 16733525));
         colors.add(new CyvClientColor("gold", ChatFormattingString.GOLD, 16755200));

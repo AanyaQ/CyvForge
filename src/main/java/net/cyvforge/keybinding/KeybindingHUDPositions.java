@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 
 public class KeybindingHUDPositions extends CyvKeybinding {
     public KeybindingHUDPositions() {
-        super("key.openhudpositions.desc", Keyboard.KEY_RSHIFT);
+        super("key.openhudpositions.desc", Keyboard.KEY_P);
     }
 
     @Override

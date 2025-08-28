@@ -68,7 +68,7 @@ public class GuiModConfig extends CyvGui {
                 sr.getScaledWidth()/2+sizeX/2+14, sr.getScaledHeight()/2+sizeY/2+4, 10, theme.background1);
 
         //buttons
-        this.backButton.draw(mouseX, mouseY + (int) scroll);
+        this.backButton.draw(mouseX, mouseY);
 
         //begin scissoring (I am a very mature individual who does not have a dirty mind)
         int centerx = sr.getScaledWidth() * sr.getScaleFactor() / 2;
