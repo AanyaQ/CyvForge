@@ -11,6 +11,8 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.input.Keyboard;
 
+import java.util.ArrayList;
+
 public class ConfigPanelDecimalEntry implements ConfigPanel {
     public GuiTextField field;
     public String configOption;
@@ -26,14 +28,14 @@ public class ConfigPanelDecimalEntry implements ConfigPanel {
     private double minBound = -Double.MAX_VALUE;
     private double maxBound = Double.MAX_VALUE;
 
-    public ConfigPanelDecimalEntry(int index, String configOption, String displayString, double min, double max, GuiModConfig screenIn) {
-        this(index, configOption, displayString, screenIn);
+    public ConfigPanelDecimalEntry(ArrayList<ConfigPanel> array, String configOption, String displayString, double min, double max, GuiModConfig screenIn) {
+        this(array, configOption, displayString, screenIn);
         this.minBound = min;
         this.maxBound = max;
     }
 
-    public ConfigPanelDecimalEntry(int index, String configOption, String displayString, GuiModConfig screenIn) {
-        this.index = index;
+    public ConfigPanelDecimalEntry(ArrayList<ConfigPanel> array, String configOption, String displayString, GuiModConfig screenIn) {
+        this.index = array.size();
         this.displayString = displayString;
         this.configOption = configOption;
         this.screenIn = screenIn;

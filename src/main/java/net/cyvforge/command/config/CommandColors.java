@@ -15,7 +15,7 @@ public class CommandColors extends CyvCommand {
     public void run(ICommandSender sender, String[] args) {
         String str = "List of colors usable:";
         for (CyvClientColorHelper.CyvClientColor c : CyvClientColorHelper.colors) {
-            str += "\n" + c.chatColor + c.name;
+            str += "\n" + c.getChatFormatting() + c.name;
         }
 
         CyvForge.sendChatMessage(str);

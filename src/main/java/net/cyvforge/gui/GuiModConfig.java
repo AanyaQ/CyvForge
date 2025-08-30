@@ -123,60 +123,67 @@ public class GuiModConfig extends CyvGui {
         this.panels.clear();
         this.scroll = 0;
 
-        panels.add(new ConfigPanelOptionSwitcher<String>(0, "color1", "Color 1", CyvClientColorHelper.colorStrings, this) {
+        // globals
+        panels.add(new ConfigPanelOptionSwitcher<String>(panels, "color1", "Color 1", CyvClientColorHelper.colorStrings, this) {
             public void onValueChange() {CyvClientColorHelper.setColor1(CyvClientConfig.getString("color1", "aqua"));}});
-        panels.add(new ConfigPanelOptionSwitcher<String>(1, "color2", "Color 2", CyvClientColorHelper.colorStrings, this){
+        panels.add(new ConfigPanelOptionSwitcher<String>(panels, "color2", "Color 2", CyvClientColorHelper.colorStrings, this){
             public void onValueChange() {CyvClientColorHelper.setColor2(CyvClientConfig.getString("color2", "aqua"));}});
-        panels.add(new ConfigPanelOptionSwitcher<String>(2, "theme", "Color Theme", ColorTheme.getThemes(), this) {
+        panels.add(new ConfigPanelOptionSwitcher<String>(panels, "theme", "Color Theme", ColorTheme.getThemes(), this) {
             public void onValueChange() {
                 CyvForge.theme = ColorTheme.valueOf(CyvClientConfig.getString("theme", "CYVISPIRIA"));}
         });
-        panels.add(new ConfigPanelToggle(3, "whiteChat", "Color2 always white in chat", this));
-        panels.add(new ConfigPanelIntegerSlider(4, "df", "Decimal Precision", 1, 16, this) {
+        panels.add(new ConfigPanelToggle(panels, "whiteChat", "Color2 always white in chat", this));
+        panels.add(new ConfigPanelIntegerSlider(panels, "df", "Decimal Precision", 1, 16, this) {
             public void onValueChange() {
                 CyvForge.df.setMaximumFractionDigits(CyvClientConfig.getInt("df", 5));}});
-        panels.add(new ConfigPanelToggle(5, "trimZeroes", "Trim Zeroes", this) {
+        panels.add(new ConfigPanelToggle(panels, "trimZeroes", "Trim Zeroes", this) {
             public void onValueChange() {
                 if (CyvClientConfig.getBoolean("trimZeroes", true)) CyvForge.df.setMinimumFractionDigits(0);
                 else CyvForge.df.setMinimumFractionDigits(CyvClientConfig.getInt("df",5));
         }});
-        panels.add(new ConfigPanelEmptySpace(6, this));
+        panels.add(new ConfigPanelEmptySpace(panels, this));
 
-        //mpk
-        panels.add(new ConfigPanelToggle(7, "showMilliseconds", "Show Millisecond Timings", this));
-        panels.add(new ConfigPanelToggle(8, "sendLbChatOffset", "Send Landing Offset", this));
-        panels.add(new ConfigPanelToggle(9, "sendMmChatOffset", "Send Momentum Offset", this));
-        panels.add(new ConfigPanelToggle(10, "highlightLanding", "Highlight Landing Blocks", this));
-        panels.add(new ConfigPanelToggle(11, "highlightLandingCond", "Highlight Landing Conditions", this));
-        panels.add(new ConfigPanelToggle(12, "momentumPbCancelling", "Momentum PB Cancelling", this));
-        panels.add(new ConfigPanelEmptySpace(13, this));
+        // mpk
+        panels.add(new ConfigPanelToggle(panels, "showMilliseconds", "Show Millisecond Timings", this));
+        panels.add(new ConfigPanelToggle(panels, "sendLbChatOffset", "Send Landing Offset", this));
+        panels.add(new ConfigPanelToggle(panels, "sendMmChatOffset", "Send Momentum Offset", this));
+        panels.add(new ConfigPanelToggle(panels, "highlightLanding", "Highlight Landing Blocks", this));
+        panels.add(new ConfigPanelToggle(panels, "highlightLandingCond", "Highlight Landing Conditions", this));
+        panels.add(new ConfigPanelToggle(panels, "momentumPbCancelling", "Momentum PB Cancelling", this));
+        panels.add(new ConfigPanelEmptySpace(panels, this));
 
-        //inertia
-        panels.add(new ConfigPanelToggle(14, "inertiaEnabled", "Inertia Listener Enabled", this));
-        panels.add(new ConfigPanelIntegerSlider(15, "inertiaTick", "Air tick", 1, 12, this));
-        panels.add(new ConfigPanelDecimalEntry(16, "inertiaMin", "Min Speed", this));
-        panels.add(new ConfigPanelDecimalEntry(17, "inertiaMax", "Max Speed", this));
-        panels.add(new ConfigPanelOptionSwitcher<Character>(18, "inertiaAxis", "Inertia Axis", new Character[] {'x', 'z'}, this));
-        panels.add(new ConfigPanelOptionSwitcher<String>(19, "inertiaGroundType", "Ground Type", new String[] {"normal", "ice", "slime"}, this));
+        // label specific
+        panels.add(new ConfigPanelToggle(panels, "showFacingAxis", "Show Facing Axis", this));
+        panels.add(new ConfigPanelIntegerSlider(panels, "turnHUDAngleMin", "Turn HUD Angle Min", 1, 12, this));
+        panels.add(new ConfigPanelIntegerSlider(panels, "turnHUDAngleMax", "Turn HUD Angle Max", 1, 12, this));
 
-        //macro
-        panels.add(new ConfigPanelEmptySpace(20, this));
-        panels.add(new ConfigPanelToggle(21, "smoothMacro", "Smooth Macro", this));
+        // macro
+        panels.add(new ConfigPanelEmptySpace(panels, this));
+        panels.add(new ConfigPanelToggle(panels, "smoothMacro", "Smooth Macro", this));
 
-        //position checker
-        panels.add(new ConfigPanelEmptySpace(22, this));
-        panels.add(new ConfigPanelToggle(23, "positionCheckerEnabled", "Position Checker Enabled", this));
-        panels.add(new ConfigPanelIntegerSlider(24, "positionCheckerTick", "Air tick", 1, 12, this));
-        panels.add(new ConfigPanelDecimalEntry(25, "positionCheckerMinX", "Min X", this));
-        panels.add(new ConfigPanelDecimalEntry(26, "positionCheckerMaxX", "Max X", this));
-        panels.add(new ConfigPanelDecimalEntry(27, "positionCheckerMinZ", "Min Z", this));
-        panels.add(new ConfigPanelDecimalEntry(28, "positionCheckerMaxZ", "Max Z", this));
-        panels.add(new ConfigPanelToggle(29, "positionCheckerZNeo", "Z Neo Mode", this));
+        // inertia
+        panels.add(new ConfigPanelToggle(panels, "inertiaEnabled", "Inertia Listener Enabled", this));
+        panels.add(new ConfigPanelIntegerSlider(panels, "inertiaTick", "Air tick", 1, 12, this));
+        panels.add(new ConfigPanelDecimalEntry(panels, "inertiaMin", "Min Speed", this));
+        panels.add(new ConfigPanelDecimalEntry(panels, "inertiaMax", "Max Speed", this));
+        panels.add(new ConfigPanelOptionSwitcher<>(panels, "inertiaAxis", "Inertia Axis", new Character[] {'x', 'z'}, this));
+        panels.add(new ConfigPanelOptionSwitcher<>(panels, "inertiaGroundType", "Ground Type", new String[] {"normal", "ice", "slime"}, this));
 
-        panels.add(new ConfigPanelEmptySpace(30, this));
-        panels.add(new ConfigPanelToggle(31, "singleplayerCheckpointsEnabled", "Custom Checkpoints Enabled", this));
-        panels.add(new ConfigPanelIntegerSlider(32, "generatorDyeColor", "Generator Dye Color", 0, 15, this));
-        panels.add(new ConfigPanelIntegerSlider(33, "generatorItemSlot", "Generator Hotbar Slot", 0, 8, this));
+        // position checker
+        panels.add(new ConfigPanelEmptySpace(panels, this));
+        panels.add(new ConfigPanelToggle(panels, "positionCheckerEnabled", "Position Checker Enabled", this));
+        panels.add(new ConfigPanelIntegerSlider(panels, "positionCheckerTick", "Air tick", 1, 12, this));
+        panels.add(new ConfigPanelDecimalEntry(panels, "positionCheckerMinX", "Min X", this));
+        panels.add(new ConfigPanelDecimalEntry(panels, "positionCheckerMaxX", "Max X", this));
+        panels.add(new ConfigPanelDecimalEntry(panels, "positionCheckerMinZ", "Min Z", this));
+        panels.add(new ConfigPanelDecimalEntry(panels, "positionCheckerMaxZ", "Max Z", this));
+        panels.add(new ConfigPanelToggle(panels, "positionCheckerZNeo", "Z Neo Mode", this));
+
+        // checkpoints
+        panels.add(new ConfigPanelEmptySpace(panels, this));
+        panels.add(new ConfigPanelToggle(panels, "singleplayerCheckpointsEnabled", "Custom Checkpoints Enabled", this));
+        panels.add(new ConfigPanelIntegerSlider(panels, "generatorDyeColor", "Generator Dye Color", 0, 15, this));
+        panels.add(new ConfigPanelIntegerSlider(panels, "generatorItemSlot", "Generator Hotbar Slot", 0, 8, this));
 
         maxScroll = (int) Math.max(0, fontRendererObj.FONT_HEIGHT * 2 * Math.ceil(panels.size()) - (sizeY-20));
         if (scroll > maxScroll) scroll = maxScroll;

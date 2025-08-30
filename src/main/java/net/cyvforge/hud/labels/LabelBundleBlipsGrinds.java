@@ -29,8 +29,8 @@ public class LabelBundleBlipsGrinds extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(177, 164);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 DecimalFormat df = CyvForge.df;
                 FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
 
@@ -45,8 +45,8 @@ public class LabelBundleBlipsGrinds extends LabelBundle {
                         pos.getAbsoluteY()+1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
 
                 StringBuilder str = new StringBuilder("0.");
@@ -74,8 +74,8 @@ public class LabelBundleBlipsGrinds extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(177, 173);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
 
                 drawString("Grinds: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
@@ -83,8 +83,8 @@ public class LabelBundleBlipsGrinds extends LabelBundle {
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
 
                 drawString("Grinds: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);

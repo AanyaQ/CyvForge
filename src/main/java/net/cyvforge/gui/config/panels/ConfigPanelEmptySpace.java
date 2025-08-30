@@ -5,6 +5,8 @@ import net.cyvforge.gui.config.ConfigPanel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 
+import java.util.ArrayList;
+
 public class ConfigPanelEmptySpace implements ConfigPanel {
     public final int index;
     public GuiModConfig screenIn;
@@ -14,8 +16,8 @@ public class ConfigPanelEmptySpace implements ConfigPanel {
     private int sizeX;
     private int sizeY;
 
-    public ConfigPanelEmptySpace(int index, GuiModConfig screenIn) {
-        this.index = index;
+    public ConfigPanelEmptySpace(ArrayList<ConfigPanel> array, GuiModConfig screenIn) {
+        this.index = array.size();
         this.screenIn = screenIn;
 
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());

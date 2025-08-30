@@ -11,7 +11,7 @@ public class CyvClientConfig {
     public HashMap<String,ConfigValue<?>> configFields = new LinkedHashMap<>();
 
     public void init() {
-        //special globals
+        // special globals
         configFields.put("color1", new ConfigValue<String>("aqua"));
         configFields.put("color2", new ConfigValue<String>("white"));
         configFields.put("theme", new ConfigValue<String>("CYVISPIRIA"));
@@ -20,7 +20,7 @@ public class CyvClientConfig {
         configFields.put("df", new ConfigValue<Integer>(5));
         configFields.put("trimZeroes", new ConfigValue<Boolean>(true));
 
-        //parkour
+        // parkour
         configFields.put("showMilliseconds", new ConfigValue<Boolean>(true));
 
         configFields.put("sendLbChatOffset", new ConfigValue<Boolean>(false));
@@ -30,7 +30,16 @@ public class CyvClientConfig {
         configFields.put("highlightLandingCond", new ConfigValue<Boolean>(false));
         configFields.put("momentumPbCancelling", new ConfigValue<Boolean>(false));
 
-        //inertia listener
+        // label specific
+        configFields.put("showFacingAxis", new ConfigValue<Boolean>(false));
+        configFields.put("turnHUDAngleMin", new ConfigValue<Integer>(1));
+        configFields.put("turnHUDAngleMax", new ConfigValue<Integer>(12));
+
+        // macros
+        configFields.put("currentMacro", new ConfigValue<String>("macro"));
+        configFields.put("smoothMacro", new ConfigValue<Boolean>(false));
+
+        // inertia listener
         configFields.put("inertiaEnabled", new ConfigValue<Boolean>(false));
         configFields.put("inertiaTick", new ConfigValue<Integer>(4));
         configFields.put("inertiaMin", new ConfigValue<Double>(-0.02));
@@ -38,11 +47,7 @@ public class CyvClientConfig {
         configFields.put("inertiaAxis", new ConfigValue<Character>('x'));
         configFields.put("inertiaGroundType", new ConfigValue<String>("normal"));
 
-        //macros
-        configFields.put("currentMacro", new ConfigValue<String>("macro"));
-        configFields.put("smoothMacro", new ConfigValue<Boolean>(false));
-
-        //position checker
+        // position checker
         configFields.put("positionCheckerEnabled", new ConfigValue<Boolean>(false));
         configFields.put("positionCheckerTick", new ConfigValue<Integer>(7));
         configFields.put("positionCheckerMinX", new ConfigValue<Double>(-10000.0));
@@ -51,7 +56,7 @@ public class CyvClientConfig {
         configFields.put("positionCheckerMaxZ", new ConfigValue<Double>(10000.0));
         configFields.put("positionCheckerZNeo", new ConfigValue<Boolean>(false));
 
-        //checkpoints
+        // checkpoints
         configFields.put("singleplayerCheckpointsEnabled", new ConfigValue<Boolean>(true));
         configFields.put("generatorDyeColor", new ConfigValue<Integer>(1));
         configFields.put("generatorItemSlot", new ConfigValue<Integer>(0));

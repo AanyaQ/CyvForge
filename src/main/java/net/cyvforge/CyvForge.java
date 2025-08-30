@@ -76,9 +76,9 @@ public class CyvForge {
 	public static void sendChatMessage(Object text) {
 		try {
 			String chatColor2 = CyvClientConfig.getBoolean("whiteChat", false) ?
-					CyvClientColorHelper.colors.get(12).chatColor : CyvClientColorHelper.color2.chatColor;
+					CyvClientColorHelper.colors.get(12).getChatFormatting() : CyvClientColorHelper.color2.getChatFormatting();
 			Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(
-					CyvClientColorHelper.color1.chatColor + "<Cyv> " + chatColor2 + text.toString()));
+					CyvClientColorHelper.color1.getChatFormatting() + "<Cyv> " + chatColor2 + text.toString()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

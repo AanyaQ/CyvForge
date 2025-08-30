@@ -9,6 +9,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.MathHelper;
 
+import java.util.ArrayList;
+
 public class ConfigPanelIntegerSlider implements ConfigPanel {
     public int sliderValue;
     public String configOption;
@@ -23,8 +25,8 @@ public class ConfigPanelIntegerSlider implements ConfigPanel {
     private int sizeX;
     private int sizeY;
 
-    public ConfigPanelIntegerSlider(int index, String configOption, String displayString, int minValue, int maxValue, GuiModConfig screenIn) {
-        this.index = index;
+    public ConfigPanelIntegerSlider(ArrayList<ConfigPanel> array, String configOption, String displayString, int minValue, int maxValue, GuiModConfig screenIn) {
+        this.index = array.size();
         this.minValue = minValue;
         this.maxValue = maxValue;
         this.displayString = displayString;

@@ -36,17 +36,19 @@ public class CommandHelp extends CyvCommand {
 
          if (args.length == 0 && !subCommands.isEmpty()) { //no arguments and haven't reached top-level command
              List<String> helpText = new ArrayList<String>();
-             helpText.add(CyvClientColorHelper.color1.chatColor + commandName +  " help menu:\247r");
+             helpText.add(CyvClientColorHelper.color1.getChatFormatting() + commandName +  " help menu:\247r");
 
-             String chatColor2 = CyvClientConfig.getBoolean("whiteChat", false) ? CyvClientColorHelper.colors.get(12).chatColor
-                     : CyvClientColorHelper.color2.chatColor;
+             String chatColor2 = CyvClientConfig.getBoolean("whiteChat", false) ?
+                     CyvClientColorHelper.colors.get(12).getChatFormatting()
+                     : CyvClientColorHelper.color2.getChatFormatting();
 
              for (CyvCommand c : subCommands) {
-                 helpText.add(CyvClientColorHelper.color1.chatColor + c.name + ": "
+                 helpText.add(CyvClientColorHelper.color1.getChatFormatting() + c.name + ": "
                          + chatColor2 + c.helpString);
              }
 
-             helpText.add(CyvClientColorHelper.color1.chatColor + "\247oNote: Use " + commandPath + " [command] for details");
+             helpText.add(CyvClientColorHelper.color1.getChatFormatting()
+                     + "\247oNote: Use " + commandPath + " [command] for details");
 
              CyvForge.sendChatMessage(String.join("\n", helpText));
 
@@ -85,7 +87,7 @@ public class CommandHelp extends CyvCommand {
                          + "Aliases: " + String.join(", ", commandNames) + "\n"
                          + "Usage: " + targetCommand.usage + "\n"
                          + targetCommand.getDetailedHelp()
-                         + "\n" + CyvClientColorHelper.color1.chatColor +
+                         + "\n" + CyvClientColorHelper.color1.getChatFormatting() +
                          "\247oNote: Use " + commandPath + " to list subcommands."
                  );
 

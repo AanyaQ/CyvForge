@@ -8,6 +8,8 @@ import net.cyvforge.util.GuiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 
+import java.util.ArrayList;
+
 public class ConfigPanelOptionSwitcher<T> implements ConfigPanel {
     public int sliderValue;
     public String configOption;
@@ -21,8 +23,8 @@ public class ConfigPanelOptionSwitcher<T> implements ConfigPanel {
     private int sizeX;
     private int sizeY;
 
-    public ConfigPanelOptionSwitcher(int index, String configOption, String displayString, T[] options, GuiModConfig screenIn) {
-        this.index = index;
+    public ConfigPanelOptionSwitcher(ArrayList<ConfigPanel> array, String configOption, String displayString, T[] options, GuiModConfig screenIn) {
+        this.index = array.size();
         this.displayString = displayString;
         this.configOption = configOption;
         this.screenIn = screenIn;

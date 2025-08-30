@@ -28,8 +28,8 @@ public class LabelBundleSpeedVector extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(0, 214);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 DecimalFormat df = CyvForge.df;
                 String x = df.format(ParkourTickListener.vx);
@@ -48,8 +48,8 @@ public class LabelBundleSpeedVector extends LabelBundle {
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 StringBuilder str = new StringBuilder("0.");
                 for (int i = 0; i<Integer.parseInt(CyvForge.config.configFields.get("df").value.toString()); i++) str.append("0");
@@ -84,8 +84,8 @@ public class LabelBundleSpeedVector extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(0, 223);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
 
                 DecimalFormat df = CyvForge.df;
@@ -101,8 +101,8 @@ public class LabelBundleSpeedVector extends LabelBundle {
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
 
                 StringBuilder str = new StringBuilder("0.");

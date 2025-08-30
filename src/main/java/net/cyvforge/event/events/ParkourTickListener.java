@@ -46,8 +46,10 @@ public class ParkourTickListener {
     public static double hvx = 0, hvz = 0; //hit velocities
 
     public static float jf = 0, jp = 0; //jump angles
-    public static float sf = 0, sp = 0; //second turn angles
     public static float pf = 0, pp = 0; //preturn angles
+
+    // turning angles
+    public static float[] turningAngles = new float[12];
 
     //inertia
     public static double stored_v = 0;
@@ -102,8 +104,7 @@ public class ParkourTickListener {
         calculateLastTiming();
         doCheckpoints();
 
-        if (lastTick == null) {
-        } else {
+        if (lastTick != null) {
             if ((!lastTick.onGround || !mcPlayer.onGround) && !mcPlayer.capabilities.isFlying) airtime++;
 
             x = mcPlayer.posX;
@@ -160,9 +161,6 @@ public class ParkourTickListener {
                 }
             }
 
-        } else if (airtime == 2 && lastTick.vy > 0) {
-            sf = f;
-            sp = p;
         }
 
         //last 45
@@ -173,6 +171,11 @@ public class ParkourTickListener {
 
         //last turning
         if (f != lastTick.f) lastTurning = f - lastTick.f;
+
+        // update turning angles
+        if (airtime >= 1 && airtime <= 12) {
+            turningAngles[airtime - 1] = f - lastTick.f;
+        }
 
         //hit tick
         if (lastTick != null && mcPlayer.onGround && !lastTick.onGround && vy < 0) {

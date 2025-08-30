@@ -23,16 +23,16 @@ public class LabelBundleCoordinates extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(0, 1);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 drawString("FPS: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
                 drawString(Minecraft.getDebugFPS(), pos.getAbsoluteX() + 1 + font.getStringWidth("FPS: ")
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 drawString("FPS: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
                 drawString("360", pos.getAbsoluteX() + 1 + font.getStringWidth("FPS: ")
@@ -48,8 +48,8 @@ public class LabelBundleCoordinates extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(0, 10);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 DecimalFormat df = CyvForge.df;
                 String x = df.format(ParkourTickListener.x);
@@ -58,8 +58,8 @@ public class LabelBundleCoordinates extends LabelBundle {
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 StringBuilder str = new StringBuilder("0.");
                 for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
@@ -77,8 +77,8 @@ public class LabelBundleCoordinates extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(0, 19);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 DecimalFormat df = CyvForge.df;
                 String y = df.format(ParkourTickListener.y);
@@ -87,8 +87,8 @@ public class LabelBundleCoordinates extends LabelBundle {
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 StringBuilder str = new StringBuilder("0.");
                 for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
@@ -106,8 +106,8 @@ public class LabelBundleCoordinates extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(0, 28);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 DecimalFormat df = CyvForge.df;
                 String z = df.format(ParkourTickListener.z);
@@ -117,8 +117,8 @@ public class LabelBundleCoordinates extends LabelBundle {
             }
             public void renderDummy(ScreenPosition pos) {
                 int d = CyvClientConfig.getInt("df",5);
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 StringBuilder str = new StringBuilder("0.");
                 for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
@@ -136,12 +136,12 @@ public class LabelBundleCoordinates extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(0, 37);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 DecimalFormat df = CyvForge.df;
                 String f;
-                if (/*frameBasedFacing*/false) {
+                if (CyvClientConfig.getBoolean("showFacingAxis", false)) {
                     f = df.format(ParkourTickListener.formatYaw(mc.thePlayer.rotationYaw));
                 } else {
                     f = (df.format((ParkourTickListener.lastTick == null) ? 0 : ParkourTickListener.formatYaw(ParkourTickListener.lastTick.f)))+"\u00B0";
@@ -151,7 +151,7 @@ public class LabelBundleCoordinates extends LabelBundle {
                 drawString(f, pos.getAbsoluteX() + 1 + font.getStringWidth("F: ")
                         , pos.getAbsoluteY() + 1, color2);
 
-                if (/*ModCoordinates.this.showAxis*/ false) {
+                if (CyvClientConfig.getBoolean("showFacingAxis", false)) {
                     float absFacing = Math.abs(ParkourTickListener.formatYaw(ParkourTickListener.lastTick.f));
                     drawString(((absFacing > 45 && absFacing < 135) ? " X" : " Z")
                             ,pos.getAbsoluteX() + 1 + font.getStringWidth("F: " + f), pos.getAbsoluteY() + 1, color1);
@@ -159,8 +159,8 @@ public class LabelBundleCoordinates extends LabelBundle {
 
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 StringBuilder str = new StringBuilder("0.");
                 for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
@@ -168,7 +168,7 @@ public class LabelBundleCoordinates extends LabelBundle {
                 drawString(str+"\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth("F: ")
                         , pos.getAbsoluteY() + 1, color2);
 
-                if (/*ModCoordinates.this.showAxis*/ false) {
+                if (CyvClientConfig.getBoolean("showFacingAxis", false)) {
                     drawString(" Z",pos.getAbsoluteX() + 1 + font.getStringWidth("F: " + str+"\u00B0"), pos.getAbsoluteY() + 1, color1);
                 }
             }
@@ -182,8 +182,8 @@ public class LabelBundleCoordinates extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(0, 46);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 DecimalFormat df = CyvForge.df;
                 String p;
@@ -198,8 +198,8 @@ public class LabelBundleCoordinates extends LabelBundle {
 
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 StringBuilder str = new StringBuilder("0.");
                 for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");

@@ -8,6 +8,8 @@ import net.cyvforge.util.GuiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 
+import java.util.ArrayList;
+
 public class ConfigPanelToggleModes implements ConfigPanel {
     public boolean sliderValue;
     public String configOption;
@@ -22,8 +24,8 @@ public class ConfigPanelToggleModes implements ConfigPanel {
     private int sizeX;
     private int sizeY;
 
-    public ConfigPanelToggleModes(int index, String configOption, String displayString, String s1, String s2, GuiModConfig screenIn) {
-        this.index = index;
+    public ConfigPanelToggleModes(ArrayList<ConfigPanel> array, String configOption, String displayString, String s1, String s2, GuiModConfig screenIn) {
+        this.index = array.size();
         this.displayString = displayString;
         this.configOption = configOption;
         this.screenIn = screenIn;

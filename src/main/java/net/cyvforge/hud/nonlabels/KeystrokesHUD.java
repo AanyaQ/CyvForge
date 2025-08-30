@@ -57,7 +57,7 @@ public class KeystrokesHUD extends DraggableHUDElement {
 
             GuiUtils.drawCenteredString(displayString, pos.getAbsoluteX() + key.x + key.width/2,
                     pos.getAbsoluteY() + key.y + key.height/2 - (int)(mc.fontRendererObj.FONT_HEIGHT * (size*scale/66.0F)/2) + 1,
-                    key.isDown() ? (int) CyvClientColorHelper.color1.drawColor : Color.white.getRGB(), true);
+                    key.isDown() ? (int) CyvClientColorHelper.color1.getDrawColor() : Color.white.getRGB(), true);
         }
     }
 
@@ -66,10 +66,9 @@ public class KeystrokesHUD extends DraggableHUDElement {
         if (!this.isVisible) return;
 
         this.render(pos);
-
     }
 
-    private class Key {
+    private static class Key {
         public final String name;
         public final KeyBinding keyBind;
         public final int x, y, width, height;
@@ -107,14 +106,14 @@ public class KeystrokesHUD extends DraggableHUDElement {
         int spc = this.getWidth()/5; //spacebar
 
         this.keys = new ArrayList<Key>();
-        keys.add(new Key("W", mc.gameSettings.keyBindForward, sq+1, 1, sq-2, sq-2, 0));
-        keys.add(new Key("A", mc.gameSettings.keyBindLeft, 1, sq+1, sq-2, sq-2, 1));
-        keys.add(new Key("S", mc.gameSettings.keyBindBack, sq+1, sq+1, sq-2, sq-2, 2));
-        keys.add(new Key("D", mc.gameSettings.keyBindRight, (2*sq)+1, sq+1, sq-2, sq-2, 3));
-        keys.add(new Key("-----", mc.gameSettings.keyBindJump, 1, (2*sq)+srh+1, this.getWidth()-2, spc-2, 4));
+        keys.add(new Key("W", mc.gameSettings.keyBindForward, sq + 1, 1, sq - 2, sq - 2, 0));
+        keys.add(new Key("A", mc.gameSettings.keyBindLeft, 1, sq + 1, sq - 2, sq - 2, 1));
+        keys.add(new Key("S", mc.gameSettings.keyBindBack, sq + 1, sq + 1, sq - 2, sq - 2, 2));
+        keys.add(new Key("D", mc.gameSettings.keyBindRight, (2 * sq) + 1, sq + 1, sq - 2, sq - 2, 3));
+        keys.add(new Key("-----", mc.gameSettings.keyBindJump, 1, (2 * sq) + srh + 1, this.getWidth() - 2, spc - 2, 4));
 
-        keys.add(new Key("Spr", mc.gameSettings.keyBindSprint, 1, (2*sq)+1, srl-2, srh-2, 5));
-        keys.add(new Key("Snk", mc.gameSettings.keyBindSneak, srl+1, (2*sq)+1, srl-2, srh-2, 6));
+        keys.add(new Key("Spr", mc.gameSettings.keyBindSprint, 1, (2 * sq) + 1, srl - 2, srh - 2, 5));
+        keys.add(new Key("Snk", mc.gameSettings.keyBindSneak, srl + 1, (2 * sq) + 1, srl - 2, srh - 2, 6));
     }
 
 }

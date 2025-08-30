@@ -24,8 +24,8 @@ public class LabelBundleLasts extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(177, 74);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
                 
                 DecimalFormat df = CyvForge.df;
@@ -36,8 +36,8 @@ public class LabelBundleLasts extends LabelBundle {
                         , pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
 
                 StringBuilder str = new StringBuilder("0.");
@@ -58,8 +58,8 @@ public class LabelBundleLasts extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(177, 92);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
 
                 MovementInput input = mc.thePlayer.movementInput;
@@ -73,8 +73,8 @@ public class LabelBundleLasts extends LabelBundle {
                         pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
 
                 drawString("Last Input: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
@@ -92,8 +92,8 @@ public class LabelBundleLasts extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(177, 83);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
 
                 DecimalFormat df = CyvForge.df;
@@ -104,8 +104,8 @@ public class LabelBundleLasts extends LabelBundle {
                         pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
 
                 StringBuilder str = new StringBuilder("0.");
@@ -126,8 +126,8 @@ public class LabelBundleLasts extends LabelBundle {
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(177, 101);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
 
                 String str = "None";
@@ -144,8 +144,8 @@ public class LabelBundleLasts extends LabelBundle {
                         pos.getAbsoluteY() + 1, color2);
             }
             public void renderDummy(ScreenPosition pos) {
-                long color1 = CyvClientColorHelper.color1.drawColor;
-                long color2 = CyvClientColorHelper.color2.drawColor;
+                long color1 = CyvClientColorHelper.color1.getDrawColor();
+                long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
 
                 drawString("Last Sidestep: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
