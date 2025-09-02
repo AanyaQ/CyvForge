@@ -34,7 +34,7 @@ import java.util.List;
 @Mod(modid = CyvForge.MODID, version = CyvForge.VERSION)
 public class CyvForge {
 	public static final String MODID = "cyvforge";
-	public static final String VERSION = "1.0.2";
+	public static final String VERSION = "1.1";
 
 	public static CyvClientConfig config = new CyvClientConfig();
 	public static DecimalFormat df = new DecimalFormat("#");

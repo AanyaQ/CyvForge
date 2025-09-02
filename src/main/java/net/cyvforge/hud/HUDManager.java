@@ -50,6 +50,7 @@ public class HUDManager {
         registeredRenderers.addAll(new LabelBundleTurningAngles().labels);
         registeredRenderers.addAll(new LabelBundleHitExtras().labels);
         registeredRenderers.addAll(new LabelBundleBlipsGrinds().labels);
+        registeredRenderers.add(new LabelTime());
 
     }
 

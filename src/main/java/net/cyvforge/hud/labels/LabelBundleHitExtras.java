@@ -19,6 +19,7 @@ public class LabelBundleHitExtras extends LabelBundle {
             public String getDisplayName() {return "Hit Angle";}
             public int getWidth() {return getLabelWidth(getDisplayName());}
             public int getHeight() {return getLabelHeight();}
+            public boolean enabledByDefault() {return false;}
             public ScreenPosition getDefaultPosition() {return new ScreenPosition(177, 146);}
             public void render(ScreenPosition pos) {
                 if (!this.isVisible) return;

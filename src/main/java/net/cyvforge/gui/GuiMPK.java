@@ -51,7 +51,7 @@ public class GuiMPK extends CyvGui {
 
         this.settingsButton = new SubButton("Settings", sr.getScaledWidth() / 2 + sizeX / 2 + 50,
                 sr.getScaledHeight() / 2 - sizeY / 2 + 20, 100, 15);
-        this.settingsButton.setEnabled(Minecraft.getMinecraft().isSingleplayer());
+        this.settingsButton.setEnabled(true);
 
         this.macroButton = new SubButton("Open Macro", sr.getScaledWidth() / 2 + sizeX / 2 + 50,
                 sr.getScaledHeight() / 2 - sizeY / 2 + 40, 100, 15);
