@@ -19,6 +19,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -27,6 +28,7 @@ import org.lwjgl.opengl.GL11;
 import java.text.DecimalFormat;
 
 public class ParkourTickListener {
+    public static long lastPbTimestamp = 0;
     public static int airtime = 0;
     public static PosTick lastTick = new PosTick(0, 0, 0, 0, new boolean[] {false, false, false, false, false, false, false});
     public static PosTick secondLastTick = new PosTick(0, 0, 0, 0, new boolean[] {false, false, false, false, false, false, false});
@@ -442,6 +444,68 @@ public class ParkourTickListener {
             lastSprintTime = -1;
         }
 
+        //mark
+        if (airtime > 0) {
+            boolean pressingWNow = gameSettings.keyBindForward.isKeyDown();
+            boolean wasPressingW = lastTick.keys[0];
+            boolean wasPressingStrafe = lastTick.keys[1] || lastTick.keys[3];
+
+            if (pressingWNow && !wasPressingW && wasPressingStrafe) {
+
+                if (lastTiming.equals("Jam")) {
+                    lastTiming = "Mark " + airtime + "t";
+                    locked = true;
+                }
+            }
+        }
+
+        //strafejam
+        if (CyvClientConfig.getBoolean("detectStrafejam", false) && airtime > 0) {
+            boolean pressingWNow = gameSettings.keyBindForward.isKeyDown();
+            boolean pressingStrafeNow = gameSettings.keyBindLeft.isKeyDown() || gameSettings.keyBindRight.isKeyDown();
+
+            boolean wasPressingW = lastTick.keys[0];
+            boolean wasPressingStrafe = lastTick.keys[1] || lastTick.keys[3];
+
+            if (pressingWNow && !pressingStrafeNow && wasPressingW && wasPressingStrafe) {
+
+                boolean jamOnly = CyvClientConfig.getBoolean("strafejamJamOnly", true);
+                String sjSuffix = "Strafejam " + (airtime) + "t";
+
+                if (!jamOnly) {
+                    if (lastTiming.isEmpty() || lastTiming.equals("-")) {
+                        lastTiming = sjSuffix;
+                    } else if (!lastTiming.contains("Strafejam")) {
+                        lastTiming = lastTiming + " | " + sjSuffix;
+                    }
+                    locked = true;
+                } else {
+                    if (lastTiming.equals("Jam")) {
+                        lastTiming = sjSuffix;
+                        locked = true;
+                    }
+                }
+            }
+        }
+
+        //wobble
+        if (CyvClientConfig.getBoolean("detectWobble", false)) {
+            if (secondLastTick != null && lastTick != null && secondLastTick.keys != null && lastTick.keys != null) {
+                String wobbledKey = "";
+
+                // 0=W, 1=A, 2=S, 3=D
+                if (gameSettings.keyBindForward.isKeyDown() && !lastTick.keys[0] && secondLastTick.keys[0]) wobbledKey += "W";
+                if (gameSettings.keyBindLeft.isKeyDown() && !lastTick.keys[1] && secondLastTick.keys[1]) wobbledKey += "A";
+                if (gameSettings.keyBindBack.isKeyDown() && !lastTick.keys[2] && secondLastTick.keys[2]) wobbledKey += "S";
+                if (gameSettings.keyBindRight.isKeyDown() && !lastTick.keys[3] && secondLastTick.keys[3]) wobbledKey += "D";
+
+                if (!wobbledKey.isEmpty()) {
+                    lastTiming = "Wobble (" + wobbledKey + ")";
+                    // locked = true;
+                }
+            }
+        }
+
         //reset
         if (!(gameSettings.keyBindForward.isKeyDown() || //ANYTHING IS PRESSED
                 gameSettings.keyBindBack.isKeyDown() ||
@@ -672,5 +736,28 @@ public class ParkourTickListener {
 
         GlStateManager.enableDepth();
 
+    }
+
+    public static void triggerAntiCP() {
+        if (CyvClientConfig.getBoolean("antiCP", false)) {
+            lastPbTimestamp = System.currentTimeMillis();
+        }
+    }
+
+    @SubscribeEvent
+    public void onMouse(MouseEvent event) {
+        if (event.button == 1 && event.buttonstate) {
+            if (CyvClientConfig.getBoolean("antiCP", false)) {
+
+                long delayMs = CyvClientConfig.getInt("antiCPDelay", 1) * 1000L;
+                long timePassed = System.currentTimeMillis() - lastPbTimestamp;
+
+                if (timePassed < delayMs) {
+                    event.setCanceled(true);
+
+                    CyvForge.sendChatMessage("§cYou have AntiCP enabled, right-click cancelled.");
+                }
+            }
+        }
     }
 }

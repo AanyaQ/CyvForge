@@ -177,6 +177,7 @@ public class LandingBlockOffset {
                 DecimalFormat df = CyvForge.df;
                 CyvForge.sendChatMessage("New pb! " + df.format(b.pb.doubleValue()));
 
+                net.cyvforge.event.events.ParkourTickListener.triggerAntiCP();
             }
         }
 

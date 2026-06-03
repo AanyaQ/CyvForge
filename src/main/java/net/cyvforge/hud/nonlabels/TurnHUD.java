@@ -4,6 +4,7 @@ import net.cyvforge.CyvForge;
 import net.cyvforge.config.CyvClientColorHelper;
 import net.cyvforge.config.CyvClientConfig;
 import net.cyvforge.event.events.ParkourTickListener;
+import net.cyvforge.hud.LabelBundle;
 import net.cyvforge.hud.structure.DraggableHUDElement;
 import net.cyvforge.hud.structure.ScreenPosition;
 import net.minecraft.client.Minecraft;
@@ -11,75 +12,88 @@ import net.minecraft.client.gui.FontRenderer;
 
 import java.text.DecimalFormat;
 
-public class TurnHUD extends DraggableHUDElement {
+public class TurnHUD extends LabelBundle {
     FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
 
-    @Override
-    public String getName() {
-        return "turnHUD";
-    }
+    public TurnHUD() {
+        final DraggableHUDElement master = new DraggableHUDElement() {
+            @Override public String getName() { return "turnHUDMaster"; }
+            @Override public String getDisplayName() { return "Turning HUD"; }
+            @Override public int getWidth() { return 0; }
+            @Override public int getHeight() { return 0; }
+            @Override public ScreenPosition getDefaultPosition() { return new ScreenPosition(0, 0); }
+            @Override public void render(ScreenPosition pos) {}
+            @Override public void renderDummy(ScreenPosition pos) {}
+        };
+        master.isDraggable = false;
+        this.labels.add(master);
 
-    @Override
-    public String getDisplayName() {
-        return "Turning HUD";
-    }
+        for (int i = 0; i < 12; i++) {
+            final int tickIndex = i;
+            final int tickNum = i + 1;
 
-    @Override
-    public boolean enabledByDefault() {
-        return false;
-    }
+            this.labels.add(new DraggableHUDElement() {
+                @Override
+                public String getName() {
+                    return "labelTurnAngle" + tickNum;
+                }
 
-    @Override
-    public ScreenPosition getDefaultPosition() {
-        return new ScreenPosition(250, 100);
-    }
+                @Override
+                public String getDisplayName() {
+                    return " ";
+                }
 
-    @Override
-    public int getWidth() {
-        return getLabelWidth("12", true);
-    }
+                @Override
+                public ScreenPosition getDefaultPosition() {
+                    return new ScreenPosition(250, 100 + (tickIndex * 9));
+                }
 
-    @Override
-    public int getHeight() {
-        int rows = Math.max(1, Math.min(CyvClientConfig.getInt("turnHUDAngles", 12), 12));
-        return 10 * rows;
-    }
+                @Override
+                public int getWidth() {
+                    if (!master.isEnabled || !isWithinRange()) return 0;
+                    return getLabelWidth(String.valueOf(tickNum), true) + 20;
+                }
 
-    @Override
-    public void render(ScreenPosition pos) {
-        long color1 = CyvClientColorHelper.color1.getDrawColor();
-        long color2 = CyvClientColorHelper.color2.getDrawColor();
-        DecimalFormat df = CyvForge.df;
+                @Override
+                public int getHeight() {
+                    if (!master.isEnabled || !isWithinRange()) return 0;
+                    return getLabelHeight();
+                }
 
-        int a = Math.max(1, Math.min(CyvClientConfig.getInt("turnHUDAngleMin", 1), 12));
-        int b = Math.max(1, Math.min(CyvClientConfig.getInt("turnHUDAngleMax", 12), 12));
+                @Override
+                public void render(ScreenPosition pos) {
+                    if (!master.isEnabled || !this.isVisible || !isWithinRange()) return;
+                    long color1 = CyvClientColorHelper.color1.getDrawColor();
+                    long color2 = CyvClientColorHelper.color2.getDrawColor();
+                    DecimalFormat df = CyvForge.df;
 
-        for (int i = Math.min(a, b) - 1; i < Math.max(a, b); i++) {
-            String angle = df.format(ParkourTickListener.formatYaw(ParkourTickListener.turningAngles[i]));
-            drawString((i + 1) + ": ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + (i * 10), color1);
-            drawString(angle + "\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth((i + 1) + ": "),
-                    pos.getAbsoluteY() + 1 + (i * 10), color2);
+                    String angle = df.format(ParkourTickListener.formatYaw(ParkourTickListener.turningAngles[tickIndex]));
+                    drawString(tickNum + ": ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                    drawString(angle + "\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth(tickNum + ": "),
+                            pos.getAbsoluteY() + 1, color2);
+                }
+
+                @Override
+                public void renderDummy(ScreenPosition pos) {
+                    if (!master.isEnabled || !isWithinRange()) return;
+                    long color1 = this.isVisible ? CyvClientColorHelper.color1.getDrawColor() : 0xFFAAAAAA;
+                    long color2 = this.isVisible ? CyvClientColorHelper.color2.getDrawColor() : 0xFFAAAAAA;
+
+                    StringBuilder str = new StringBuilder("0.");
+                    for (int j = 0; j < CyvClientConfig.getInt("df", 5); j++) str.append("0");
+
+                    drawString(tickNum + ": ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
+                    drawString(str + "\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth(tickNum + ": "),
+                            pos.getAbsoluteY() + 1, color2);
+                }
+
+                private boolean isWithinRange() {
+                    int a = Math.max(1, Math.min(CyvClientConfig.getInt("turnHUDAngleMin", 1), 12));
+                    int b = Math.max(1, Math.min(CyvClientConfig.getInt("turnHUDAngleMax", 12), 12));
+                    return tickNum >= Math.min(a, b) && tickNum <= Math.max(a, b);
+                }
+            });
         }
-
-    }
-
-    @Override
-    public void renderDummy(ScreenPosition pos) {
-        if (!this.isVisible) return;
-        long color1 = CyvClientColorHelper.color1.getDrawColor();
-        long color2 = CyvClientColorHelper.color2.getDrawColor();
-        int a = Math.max(1, Math.min(CyvClientConfig.getInt("turnHUDAngleMin", 12), 12));
-        int b = Math.max(1, Math.min(CyvClientConfig.getInt("turnHUDAngleMax", 12), 12));
-
-        StringBuilder str = new StringBuilder("0.");
-        for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
-
-        for (int i = Math.min(a, b) - 1; i < Math.max(a, b); i++) {
-            drawString((i + 1) + ": ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1 + (i * 10), color1);
-            drawString(str+"\u00B0", pos.getAbsoluteX() + 1 + font.getStringWidth((i + 1) + ": "),
-                    pos.getAbsoluteY() + 1 + (i * 10), color2);
-        }
-
     }
 
     public int getLabelWidth(String s, boolean angle) {
@@ -88,7 +102,7 @@ public class TurnHUD extends DraggableHUDElement {
         StringBuilder str;
         if (angle) str = new StringBuilder(s + ": 000.");
         else str = new StringBuilder(s + ": 000000.");
-        for (int i = 0; i< CyvClientConfig.getInt("df",5); i++) str.append("0");
+        for (int i = 0; i< CyvClientConfig.getInt("df", 5); i++) str.append("0");
         if (angle) str.append("\u00B0");
         return font.getStringWidth(str.toString());
     }
@@ -96,5 +110,4 @@ public class TurnHUD extends DraggableHUDElement {
     public int getLabelHeight() {
         return 9;
     }
-
 }

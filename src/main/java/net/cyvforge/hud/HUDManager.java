@@ -35,7 +35,7 @@ public class HUDManager {
         registeredRenderers.add(new DirectionHUD());
         registeredRenderers.add(new TogglesprintHUD());
         registeredRenderers.add(new KeystrokesHUD());
-        registeredRenderers.add(new TurnHUD());
+        registeredRenderers.addAll(new TurnHUD().labels);
 
         registeredRenderers.addAll(new LabelBundleCoordinates().labels);
         registeredRenderers.addAll(new LabelBundleHitCoords().labels);
