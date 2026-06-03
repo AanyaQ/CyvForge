@@ -19,10 +19,13 @@ public class LabelBundleBlipsGrinds extends LabelBundle {
             public String getName() {return "labelBlips";}
             public String getDisplayName() {return "Blips";}
             public int getWidth() {
+                FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
+                if (CyvClientConfig.getBoolean("simpleBlip", false)) {
+                    return font.getStringWidth("Blips: 00000");
+                }
                 StringBuilder str = new StringBuilder("000000.");
                 for (int i=0; i<CyvClientConfig.getInt("df",5); i++) str.append("0");
-                return Minecraft.getMinecraft().fontRendererObj
-                        .getStringWidth("Blip: 00000 chained / y: " + str.toString());
+                return font.getStringWidth("Blips: 00000 chained / Y: " + str.toString());
             }
             public int getHeight() {return getLabelHeight();}
             public boolean enabledByDefault() {return false;}
@@ -38,11 +41,15 @@ public class LabelBundleBlipsGrinds extends LabelBundle {
                 drawString("" + ParkourTickListener.blips, pos.getAbsoluteX() + 1 + font.getStringWidth("Blips: ")
                         , pos.getAbsoluteY() + 1, color2);
 
-                drawString(" chained / Y: ", pos.getAbsoluteX() + 1 + font.getStringWidth("Blips: " + ParkourTickListener.blips),
-                        pos.getAbsoluteY() + 1, color1);
-                drawString(df.format(ParkourTickListener.lastBlipHeight), pos.getAbsoluteX() + 1 +
-                                font.getStringWidth("Blips: " + ParkourTickListener.blips + " chained / Y: "),
-                        pos.getAbsoluteY()+1, color2);
+                if (!CyvClientConfig.getBoolean("simpleBlip", false)) {
+                    String midText = " chained / Y: ";
+                    int offset = font.getStringWidth("Blips: " + ParkourTickListener.blips);
+
+                    drawString(midText, pos.getAbsoluteX() + 1 + offset,
+                            pos.getAbsoluteY() + 1, color1);
+                    drawString(df.format(ParkourTickListener.lastBlipHeight), pos.getAbsoluteX() + 1 + offset + font.getStringWidth(midText),
+                            pos.getAbsoluteY() + 1, color2);
+                }
             }
             public void renderDummy(ScreenPosition pos) {
                 long color1 = CyvClientColorHelper.color1.getDrawColor();
@@ -56,11 +63,15 @@ public class LabelBundleBlipsGrinds extends LabelBundle {
                 drawString("0", pos.getAbsoluteX() + 1 + font.getStringWidth("Blips: ")
                         , pos.getAbsoluteY() + 1, color2);
 
-                drawString(" chained / Y: ", pos.getAbsoluteX() + 1 + font.getStringWidth("Blips: 0"),
-                        pos.getAbsoluteY() + 1, color1);
-                drawString("" + str, pos.getAbsoluteX() + 1 +
-                                font.getStringWidth("Blips: 0 chained / Y: "),
-                        pos.getAbsoluteY()+1, color2);
+                if (!CyvClientConfig.getBoolean("simpleBlip", false)) {
+
+                    String midText = " chained / Y: ";
+                    drawString(midText, pos.getAbsoluteX() + 1 + font.getStringWidth("Blips: 0"),
+                            pos.getAbsoluteY() + 1, color1);
+                    drawString("" + str, pos.getAbsoluteX() + 1 +
+                                    font.getStringWidth("Blips: 0" + midText),
+                            pos.getAbsoluteY() + 1, color2);
+                }
             }
         });
 

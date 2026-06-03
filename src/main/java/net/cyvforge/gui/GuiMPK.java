@@ -99,6 +99,10 @@ public class GuiMPK extends CyvGui {
         this.labelLines.clear();
 
         for (DraggableHUDElement l : HUDManager.registeredRenderers) {
+            if (l.getDisplayName() == null || l.getDisplayName().trim().isEmpty()) {
+                continue;
+            }
+
             if (!fromSearch || l.getDisplayName().toLowerCase().contains(this.searchBar.getText().toLowerCase())
                     || l.getName().toLowerCase().contains(this.searchBar.getText().toLowerCase()))
                 labelLines.add(new LabelLine(l));

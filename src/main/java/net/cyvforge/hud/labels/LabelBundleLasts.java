@@ -62,11 +62,21 @@ public class LabelBundleLasts extends LabelBundle {
                 long color2 = CyvClientColorHelper.color2.getDrawColor();
                 FontRenderer font = mc.fontRendererObj;
 
-                MovementInput input = mc.thePlayer.movementInput;
-                String str = (input.moveForward > 0 ? "W" : "")
-                        + (input.moveStrafe > 0 ? "A" : "")
-                        + (input.moveForward < 0 ? "S" : "")
-                        + (input.moveStrafe < 0 ? "D" : "");
+                String str;
+                if (CyvClientConfig.getBoolean("WADdisplay", false)) {
+                    str = (mc.gameSettings.keyBindForward.isKeyDown() ? "W" : "")
+                            + (mc.gameSettings.keyBindLeft.isKeyDown() ? "A" : "")
+                            + (mc.gameSettings.keyBindBack.isKeyDown() ? "S" : "")
+                            + (mc.gameSettings.keyBindRight.isKeyDown() ? "D" : "");
+                } else {
+                    MovementInput input = mc.thePlayer.movementInput;
+                    str = (input.moveForward > 0 ? "W" : "")
+                            + (input.moveStrafe > 0 ? "A" : "")
+                            + (input.moveForward < 0 ? "S" : "")
+                            + (input.moveStrafe < 0 ? "D" : "");
+                }
+
+                if (str.isEmpty()) str = "";
 
                 drawString("Last Input: ", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color1);
                 drawString(str, pos.getAbsoluteX() + 1 + font.getStringWidth("Last Input: "),
