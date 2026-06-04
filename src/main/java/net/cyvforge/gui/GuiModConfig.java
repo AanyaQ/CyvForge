@@ -157,6 +157,7 @@ public class GuiModConfig extends CyvGui {
         panels.add(new ConfigPanelToggle(panels, "frameBased", "Frame Based Facing", this));
         panels.add(new ConfigPanelToggle(panels, "WADdisplay", "Last Input WAD Display ", this));
         panels.add(new ConfigPanelToggle(panels, "simpleBlip", "Simplified Blip", this));
+        panels.add(new ConfigPanelToggle(panels, "markInSidestep", "Mark in Sidestep", this));
         panels.add(new ConfigPanelToggle(panels, "detectWobble", "Wobble Timing", this));
         panels.add(new ConfigPanelToggle(panels, "detectStrafejam", "Strafejam Timing", this));
         panels.add(new ConfigPanelToggle(panels, "strafejamJamOnly", "Strafejam only after Jam", this));

@@ -37,6 +37,7 @@ public class CyvClientConfig {
         configFields.put("frameBased", new ConfigValue<Boolean>(false));
         configFields.put("WADdisplay", new ConfigValue<Boolean>(false));
         configFields.put("simpleBlip", new ConfigValue<Boolean>(false));
+        configFields.put("markInSidestep", new ConfigValue<Boolean>(true));
         configFields.put("detectWobble", new ConfigValue<Boolean>(false));
         configFields.put("detectStrafejam", new ConfigValue<Boolean>(false));
         configFields.put("strafejamJamOnly", new ConfigValue<Boolean>(true));

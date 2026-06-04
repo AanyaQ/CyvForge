@@ -462,10 +462,13 @@ public class ParkourTickListener {
             boolean wasPressingStrafe = lastTick.keys[1] || lastTick.keys[3];
 
             if (pressingWNow && !wasPressingW && wasPressingStrafe) {
+                boolean markInSidestep = CyvClientConfig.getBoolean("markInSidestep", true);
 
-                if (lastTiming.equals("Jam")) {
+                if (markInSidestep) {
+                    sidestep = 2;
+                    sidestepTime = airtime;
+                } else {
                     lastTiming = "Mark " + airtime + "t";
-                    locked = true;
                 }
             }
         }
@@ -521,8 +524,7 @@ public class ParkourTickListener {
         if (!(gameSettings.keyBindForward.isKeyDown() || //ANYTHING IS PRESSED
                 gameSettings.keyBindBack.isKeyDown() ||
                 gameSettings.keyBindLeft.isKeyDown() ||
-                gameSettings.keyBindRight.isKeyDown() ||
-                gameSettings.keyBindJump.isKeyDown()) &&
+                gameSettings.keyBindRight.isKeyDown()) &&
                 Minecraft.getMinecraft().thePlayer.onGround) {
             resetLastTiming();
         }
