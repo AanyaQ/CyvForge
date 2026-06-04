@@ -23,6 +23,15 @@ public class DirectionHUD extends DraggableHUDElement {
     }
 
     @Override
+    public ScreenPosition load() {
+        return getDefaultPosition();
+    }
+
+    @Override
+    public void save(ScreenPosition pos) {
+    }
+
+    @Override
     public String getName() {
         return "directionHUD";
     }
@@ -83,8 +92,6 @@ public class DirectionHUD extends DraggableHUDElement {
 
     @Override
     public void renderDummy(ScreenPosition pos) {
-        if (!this.isVisible) return;
-
         this.render(pos);
 
     }

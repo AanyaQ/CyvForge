@@ -121,7 +121,7 @@ public class GuiLb extends CyvGui {
 
         if (this.condVisibleButton.clicked(mouseX, mouseY, mouseEvent)) {
             CyvClientConfig.set("highlightLandingCond", !CyvClientConfig.getBoolean("highlightLandingCond", false));
-            this.bbVisibleButton.setText("Cond Visible: " + CyvClientConfig.getBoolean("highlightLandingCond", false));
+            this.condVisibleButton.setText("Cond Visible: " + CyvClientConfig.getBoolean("highlightLandingCond", false));
             return;
         }
 

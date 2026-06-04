@@ -4,11 +4,8 @@ import net.cyvforge.CyvForge;
 import net.cyvforge.event.events.ParkourTickListener;
 import net.cyvforge.util.defaults.CyvCommand;
 import net.cyvforge.util.parkour.LandingBlock;
-import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.AxisAlignedBB;
-
-import java.util.Arrays;
 
 public class CommandSetbox extends CyvCommand {
     public CommandSetbox() {
@@ -20,39 +17,47 @@ public class CommandSetbox extends CyvCommand {
     @Override
     public void run(ICommandSender sender, String[] args) {
         try {
-            AxisAlignedBB box = getAxisAlignedBB(args);
+            double x1 = Double.parseDouble(args[0]);
+            double x2 = Double.parseDouble(args[1]);
+            double y1 = Double.parseDouble(args[2]);
+            double y2 = Double.parseDouble(args[3]);
+            double z1 = Double.parseDouble(args[4]);
+            double z2 = Double.parseDouble(args[5]);
 
+            double minX = Math.min(x1, x2);
+            double maxX = Math.max(x1, x2);
+            double minY = Math.min(y1, y2);
+            double maxY = Math.max(y1, y2);
+            double minZ = Math.min(z1, z2);
+            double maxZ = Math.max(z1, z2);
+
+            AxisAlignedBB mathBox = new AxisAlignedBB(minX + 0.3, minY, minZ + 0.3,
+                    maxX - 0.3, maxY, maxZ - 0.3);
+
+            LandingBlock lb;
             if (ParkourTickListener.landingBlock != null) {
-                ParkourTickListener.landingBlock.bb = new AxisAlignedBB[]{box};
+                lb = ParkourTickListener.landingBlock;
+                lb.bb = new AxisAlignedBB[]{mathBox};
                 CyvForge.sendChatMessage("Landing box changed.");
-
             } else {
-
-
-                ParkourTickListener.landingBlock = new LandingBlock(box);
+                lb = new LandingBlock(mathBox);
+                ParkourTickListener.landingBlock = lb;
                 CyvForge.sendChatMessage("Landing box set.");
-
             }
+
+            lb.xMinCond = minX - 0.6;
+            lb.xMaxCond = maxX + 0.6;
+            lb.zMinCond = minZ - 0.6;
+            lb.zMaxCond = maxZ + 0.6;
+
+            lb.xMinWall = minX - 0.3;
+            lb.xMaxWall = maxX + 0.3;
+            lb.zMinWall = minZ - 0.3;
+            lb.zMaxWall = maxZ + 0.3;
+
         } catch (Exception e) {
             e.printStackTrace();
             CyvForge.sendChatMessage("Invalid setbox syntax.");
         }
-    }
-
-    private static AxisAlignedBB getAxisAlignedBB(String[] args) {
-        AxisAlignedBB player = Minecraft.getMinecraft().thePlayer.getEntityBoundingBox();
-
-        double lengthX = Math.abs(player.maxX - player.minX);
-        double lengthZ = Math.abs(player.maxZ - player.minZ);
-
-        double x1 = Double.parseDouble(args[0]) + lengthX/2;
-        double x2 = Double.parseDouble(args[1]) - lengthX/2;
-        double y1 = Double.parseDouble(args[2]);
-        double y2 = Double.parseDouble(args[3]);
-        double z1 = Double.parseDouble(args[4]) + lengthZ/2;
-        double z2 = Double.parseDouble(args[5]) - lengthZ/2;
-
-        return new AxisAlignedBB(Math.min(x1, x2), Math.min(y1, y2), Math.min(z1, z2),
-                Math.max(x1, x2), Math.max(y1, y2), Math.max(z1, z2));
     }
 }

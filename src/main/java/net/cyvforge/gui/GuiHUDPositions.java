@@ -138,6 +138,8 @@ public class GuiHUDPositions extends CyvGui {
                     CyvClientConfig.set("keystrokesSize", finalSize);
                 }
             } else if (selectedRenderer.isPresent()) {
+                if (!selectedRenderer.get().isDraggable) return;
+
                 moveSelectedRenderBy(x - prevX, y - prevY);
             }
             this.prevX = x; this.prevY = y;

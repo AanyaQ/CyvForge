@@ -63,6 +63,9 @@ public class ParkourTickListener {
 
     public static String lastTiming = "";
     public static int blips = 0;
+    public static boolean positionCheckedThisJump = false;
+    public static boolean inertiaCheckedThisJump = false;
+
     public static double lastBlipHeight = 0;
 
     public static int grinds = 0;
@@ -257,6 +260,9 @@ public class ParkourTickListener {
         if (lastTick.onGround) {
             if (airtime != 0) lastAirtime = airtime;
             airtime = 0;
+
+            positionCheckedThisJump = false;
+            inertiaCheckedThisJump = false;
         }
         else lastAirtime = airtime;
 
@@ -278,7 +284,7 @@ public class ParkourTickListener {
             else if (inertiaGroundType.equals("slime")) stored_slip = 0.8f;
             else stored_slip = 0.6f;
 
-        } else if (airtime == inertiaTick+1) {
+        } else if (airtime == inertiaTick + 1 && !inertiaCheckedThisJump) {
 
             int tick = inertiaTick;
             double min = inertiaMin;
@@ -296,6 +302,7 @@ public class ParkourTickListener {
                     CyvForge.sendChatMessage("Missed inertia at tick " + (airtime-1) + ", previous v = " + df.format(stored_v));
                 }
 
+                inertiaCheckedThisJump = true;
             }
 
         }//end checking inertia
@@ -312,7 +319,7 @@ public class ParkourTickListener {
         double zMax = CyvClientConfig.getDouble("positionCheckerMaxZ", 10000.0);
 
         if (!toggled) return;
-        if (airtime == checkTick && !zNeo) {
+        if (airtime == checkTick && !zNeo && !positionCheckedThisJump) {
             if (!((xMin <= x && x <= xMax) || (xMax <= x && x <= xMin))) return;
             if (!((zMin <= z && z <= zMax) || (zMax <= z && z <= zMin))) return;
 
@@ -320,13 +327,17 @@ public class ParkourTickListener {
 
             CyvForge.sendChatMessage("X: " + df.format(x) + ", Z: " + df.format(z));
 
-        } else if (airtime == checkTick && zNeo) {
+            positionCheckedThisJump = true;
+
+        } else if (airtime == checkTick && zNeo && !positionCheckedThisJump) {
             if (!((xMin <= x && x <= xMax) || (xMax <= x && x <= xMin))) return;
             if (!((zMin <= lastTick.z && lastTick.z <= zMax) || (zMax <= lastTick.z && lastTick.z <= zMin))) return;
 
             DecimalFormat df = CyvForge.df;
 
             CyvForge.sendChatMessage("X: " + df.format(x) + ", Z: " + df.format(lastTick.z));
+
+            positionCheckedThisJump = true;
         }
 
     }

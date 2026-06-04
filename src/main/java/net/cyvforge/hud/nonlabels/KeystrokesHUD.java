@@ -82,8 +82,6 @@ public class KeystrokesHUD extends DraggableHUDElement {
 
     @Override
     public void renderDummy(ScreenPosition pos) {
-        if (!this.isVisible) return;
-
         this.render(pos);
     }
 
